@@ -57,6 +57,10 @@ Production sampling yielded 723,314 valid unique molecules spanning 499,968 Bemi
 
 Progressive multi-objective prioritization retained 494,897 molecules after physicochemical/Lipinski eligibility, 367,801 after consensus predicted pIC50 ≥ 5.0, 311,264 after Morgan similarity < 0.50, 209,422 after Murcko similarity < 0.50, 188,232 after SA ≤ 4.0, and 181,719 after PAINS removal. The released 50,000-member pre-docking library was selected by the final priority score while retaining the highest-ranked representative from each scaffold class. See `docs/PRIORITIZATION.md` and `data/prioritized/bcrabl_final_50000.csv`.
 
+## Structure-based screening
+
+The final 50,000-member library was screened against inactive DFG-out ABL1 (PDB 2HYY) using Glide HTVS, SP, and XP. Redocking of crystallographic imatinib gave a heavy-atom RMSD of 0.877 Å. The workflow advanced 10,280 compounds to SP, approximately 1,030 after an SP GlideScore threshold of −13.0 and complementary selection criteria, and 500 compounds to XP. Supplementary Data S1 contains the complete XP500 set plus imatinib and ponatinib. The ten highest-ranked AI-generated candidates are in `results/docking/top10_ai_candidates.csv`.
+
 ## Data provenance
 
 Experimental records originated from ChEMBL target `CHEMBL2096618` and complementary BindingDB records. Exact quantitative values reported in nM were retained, censored observations were removed, structures were standardized with RDKit, and modeling was restricted to IC50. See [`docs/PROVENANCE.md`](docs/PROVENANCE.md) for the documented processing chain and current reproducibility limits.

@@ -1,0 +1,2 @@
+receptor_pdb,crystallographic_ligand,heavy_atom_rmsd_angstrom,predefined_success_threshold_angstrom,status
+2HYY,imatinib,0.877,2.0,pass

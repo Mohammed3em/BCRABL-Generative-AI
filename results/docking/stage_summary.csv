@@ -1,0 +1,5 @@
+stage,input_count,output_count,selection
+HTVS,50000,10280,HTVS ranking and advancement
+SP,10280,approximately 1030,SP GlideScore <= -13.0 with consensus activity model agreement and diversity
+XP_preselection,approximately 1030,500,Diversity-aware selection
+XP,500,10,Detailed reporting of the ten highest-ranked AI-generated candidates

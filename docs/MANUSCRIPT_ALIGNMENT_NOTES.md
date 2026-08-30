@@ -21,3 +21,7 @@ Suggested Methods wording:
 Suggested Results sentence:
 
 > The final 50,000-compound library represented 50,000 distinct scaffold classes when the acyclic class was counted explicitly.
+
+## 3. Docking intermediate artifacts
+
+The audited files contain the final XP500 workbook and Top10 results, but not the raw HTVS/SP Glide exports or receptor-grid project. The manuscript counts (50,000 → 10,280 → approximately 1,030 → 500) are retained, but the repository cannot independently regenerate the first two transitions unless those artifacts are recovered.
