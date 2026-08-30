@@ -35,9 +35,12 @@ Install the lightweight validation dependencies and run:
 python -m pip install -r requirements.txt
 python scripts/validate_release.py
 python scripts/modeling/verify_reported_metrics.py
+python scripts/generation/validate_generative_release.py
+python scripts/prioritization/validate_final_library.py
+python scripts/docking/validate_docking_release.py
 ```
 
-The commands check dataset integrity and independently recalculate R², RMSE, and MAE from the released prediction files.
+The commands check dataset integrity, independently recalculate R², RMSE, and MAE from the released prediction files, and validate the released generative settings, final 50,000-member library, and docking tables.
 
 ## Predictive modeling
 
@@ -67,11 +70,11 @@ Experimental records originated from ChEMBL target `CHEMBL2096618` and complemen
 
 ## Repository scope
 
-This repository is a publication-oriented release, not the complete working directory. Duplicate copies, raw database exports, large fingerprint matrices, most fitted-model binaries, temporary outputs, docking files, and MD trajectories are intentionally excluded. The compact optimized XGBoost surrogate is included because it is required by the reconstructed reward implementation. Other large reusable artifacts should be deposited in a versioned research repository such as Zenodo rather than committed directly to GitHub.
+This repository is a publication-oriented release, not the complete working directory. Duplicate copies, raw database exports, large fingerprint matrices, most fitted-model binaries, temporary outputs, raw docking project files, and MD trajectories are intentionally excluded. The compact optimized XGBoost surrogate is included because it is required by the reconstructed reward implementation. Final REINVENT prior/agent weights are not included; consequently, the supplied generative configurations document the completed runs but cannot be executed end-to-end from a fresh clone without those historical weights.
 
 ## Citation
 
-Please cite the associated article after publication. Machine-readable author and title metadata are provided in `CITATION.cff`; replace the placeholder article DOI and repository DOI when assigned.
+Please cite the associated article after publication. Machine-readable author, title, version, and repository metadata are provided in `CITATION.cff`; add the article DOI when assigned.
 
 ## License and source attribution
 

@@ -25,7 +25,7 @@ The preserved development scripts are scientifically useful but are not yet a si
 1. The prediction tables and independent metric verifier are the authoritative reproducibility layer in this release.
 2. Do not state that every model can be reproduced bit-for-bit from a fresh clone yet.
 3. Before final public release, record the exact Python, RDKit, scikit-learn, XGBoost, PyTorch, PyTorch Geometric, Transformers, and model-checkpoint versions.
-4. Fitted model binaries are excluded from GitHub. The two Random Forest files are approximately 258 MB and 383 MB; versioned model artifacts should be archived on Zenodo if redistribution is required.
+4. The compact optimized XGBoost surrogate required by the reconstructed reward is included. Other fitted-model binaries are excluded from GitHub; the two Random Forest files are approximately 258 MB and 383 MB.
 
 ## Interpretation
 

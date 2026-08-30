@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROCESSED = ROOT / "data" / "processed"
 SPLITS = ROOT / "data" / "splits"
 ACYCLIC = "[ACYCLIC]"
+CHECKSUM_MANIFEST = ROOT / "metadata" / "SHA256SUMS"
 
 
 def fail(message: str) -> None:
@@ -98,6 +99,17 @@ def main() -> int:
     for path in sorted((ROOT / "data").rglob("*")):
         if path.is_file():
             print(f"{sha256(path)}  {path.relative_to(ROOT)}")
+
+    for line in CHECKSUM_MANIFEST.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        expected_hash, relative_path = line.split(maxsplit=1)
+        artifact = ROOT / relative_path
+        if not artifact.is_file():
+            fail(f"Checksum manifest references missing file: {relative_path}")
+        if sha256(artifact) != expected_hash:
+            fail(f"Checksum mismatch: {relative_path}")
+    print("PASS: metadata/SHA256SUMS")
     return 0
 
 

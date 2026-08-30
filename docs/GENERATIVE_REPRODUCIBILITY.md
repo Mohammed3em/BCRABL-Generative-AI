@@ -28,4 +28,4 @@ The exact `FINAL_clean3` file referenced by the completed transfer-learning conf
 
 ## Excluded derived artifacts
 
-Intermediate TL checkpoints, duplicated model copies, exploratory scripts, figure-generation scripts, and large pairwise-similarity arrays are excluded. The compact release includes the final XGBoost surrogate required by the reconstructed reward implementation. REINVENT prior/agent weights can be archived separately with a versioned DOI if exact model reuse is required.
+Intermediate TL checkpoints, duplicated model copies, exploratory scripts, figure-generation scripts, and large pairwise-similarity arrays are excluded. The compact release includes the final XGBoost surrogate required by the reconstructed reward implementation. The final REINVENT prior/agent weights are not included, so the TOML files preserve the final settings but are not an end-to-end executable reproduction from a fresh clone.
