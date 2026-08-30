@@ -1,6 +1,6 @@
 # BCR::ABL1 generative AI study — data and modeling release
 
-This repository contains the curated IC50 dataset, fixed Bemis–Murcko scaffold partitions, predictive-model scripts and evaluation outputs, and Supplementary Data S1 for the manuscript:
+This repository contains the curated IC50 dataset, fixed Bemis–Murcko scaffold partitions, predictive-model evidence, and the final target-focused REINVENT4 transfer-learning, reinforcement-learning, and production-sampling configuration for the manuscript:
 
 > *Generative AI for BCR::ABL1 Inhibitor Design: Predictive Modeling, Target-Focused Fine-Tuning, Reinforcement Learning, and Multi-Level Validation*
 
@@ -44,6 +44,12 @@ The commands check dataset integrity and independently recalculate R², RMSE, an
 Five regressors were evaluated on the same fixed scaffold partitions: XGBoost, Random Forest, GIN, ChemBERTa-77M-MLM, and IBM MolFormer-XL. XGBoost had the strongest independent-test performance (R² = 0.7516, RMSE = 0.8064, MAE = 0.5989), followed by Random Forest (R² = 0.7377, RMSE = 0.8286, MAE = 0.6028). Exact prediction tables, training histories where available, optimized tree-model parameters, and the benchmark summary are stored under `results/modeling/`.
 
 The scripts in `scripts/modeling/study_scripts/` preserve the code used during model development. See `docs/QSAR_REPRODUCIBILITY.md` before attempting full retraining because the original scripts retain their working-directory assumptions and deep models require separate GPU-capable environments.
+
+## Generative modeling
+
+The historical transfer-learning input contains 5,624 records (5,617 distinct SMILES). REINVENT4 transfer learning used 20 epochs, a batch size of 50, and CUDA acceleration. Reinforcement learning used the DAP strategy (learning rate 1 × 10⁻⁴, sigma 128, batch size 64) with randomized SMILES augmentation. The final reward was `0.80 × activity + 0.20 × novelty`, with invalid structures assigned zero. The `IdenticalMurckoScaffold` diversity filter used a bucket size of 25 and minimum score 0.5. Production sampling targeted 1,000,000 sequences with duplicate control enabled and randomized SMILES disabled.
+
+The original final reward-source file was not retained. `scripts/generation/bcrabl_reward_reconstructed.py` is therefore explicitly identified as a reconstructed reference implementation of manuscript Equations 2–4; it is not represented as the original historical file. See `docs/GENERATIVE_REPRODUCIBILITY.md`.
 
 ## Data provenance
 

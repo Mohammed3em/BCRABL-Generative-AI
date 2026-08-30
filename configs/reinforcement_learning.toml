@@ -1,0 +1,66 @@
+run_type = "staged_learning"
+
+device = "cuda:0"
+
+tb_logdir = "tb_BCRABL_RL"
+
+
+[parameters]
+
+prior_file = "models/BCRABL_REINVENT_prior.model"
+
+agent_file = "models/BCRABL_REINVENT_agent.model"
+
+summary_csv_prefix = "BCRABL_RL_output_stage2"
+
+batch_size = 64
+
+randomize_smiles = true
+
+
+
+[learning_strategy]
+
+type = "dap"
+
+sigma = 128
+
+rate = 0.0001
+
+
+[diversity_filter]
+
+type = "IdenticalMurckoScaffold"
+
+bucket_size = 25
+
+minscore = 0.5
+
+
+[[stage]]
+
+chkpt_file = "BCRABL_stage1.chkpt"
+
+termination = "simple"
+
+max_score = 0.8
+
+min_steps = 25
+
+max_steps = 1000
+
+
+[stage.scoring]
+
+type = "geometric_mean"
+
+
+[[stage.scoring.component]]
+
+[stage.scoring.component.BCRABLScore]
+
+[[stage.scoring.component.BCRABLScore.endpoint]]
+
+name = "BCRABL_activity"
+
+weight = 1.0
