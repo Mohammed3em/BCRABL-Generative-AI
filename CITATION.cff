@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use these data, please cite the associated article."
+title: "BCR::ABL1 AI study data release"
+type: dataset
+authors:
+  - family-names: "Sahib"
+    given-names: "Mohammed Abdulaali"
+    orcid: "https://orcid.org/0009-0006-9992-5653"
+affiliation: "Department of Pharmaceutical Chemistry, College of Pharmacy, University of Kerbala"
+version: 0.1.0
+date-released: 2026-08-30
+repository-code: "https://github.com/INSERT-ACCOUNT/INSERT-REPOSITORY"
+abstract: "Curated compound-level BCR::ABL1 IC50 data, fixed Bemis-Murcko scaffold partitions, and supplementary AI-prioritization data associated with a generative molecular-design study."

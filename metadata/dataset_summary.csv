@@ -1,0 +1,12 @@
+metric,value,definition
+compounds,7912,Unique standardized SMILES in the final IC50 modeling dataset
+nonempty_scaffolds,3340,Unique nonempty Bemis-Murcko scaffold strings
+acyclic_scaffold_classes,1,Single class representing 27 valid acyclic molecules
+total_scaffold_classes,3341,Nonempty scaffolds plus the acyclic class
+train_compounds,6373,Fixed training partition
+validation_compounds,757,Fixed validation partition
+test_compounds,782,Fixed independent scaffold-test partition
+train_scaffold_classes,2672,Scaffold classes in training
+validation_scaffold_classes,334,Scaffold classes in validation including the acyclic class
+test_scaffold_classes,335,Scaffold classes in independent test
+scaffold_overlap,0,Classes shared across any two partitions
