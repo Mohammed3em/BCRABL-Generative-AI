@@ -51,13 +51,19 @@ The historical transfer-learning input contains 5,624 records (5,617 distinct SM
 
 The original final reward-source file was not retained. `scripts/generation/bcrabl_reward_reconstructed.py` is therefore explicitly identified as a reconstructed reference implementation of manuscript Equations 2–4; it is not represented as the original historical file. See `docs/GENERATIVE_REPRODUCIBILITY.md`.
 
+## Generation validation and prioritization
+
+Production sampling yielded 723,314 valid unique molecules spanning 499,968 Bemis–Murcko scaffolds. Internal diversity was 0.877; 93.58% of generated molecules had maximum Morgan similarity below 0.60 to the full 7,912-compound experimental reference, and 99.83% were non-exact reproductions of the transfer-learning input.
+
+Progressive multi-objective prioritization retained 494,897 molecules after physicochemical/Lipinski eligibility, 367,801 after consensus predicted pIC50 ≥ 5.0, 311,264 after Morgan similarity < 0.50, 209,422 after Murcko similarity < 0.50, 188,232 after SA ≤ 4.0, and 181,719 after PAINS removal. The released 50,000-member pre-docking library was selected by the final priority score while retaining the highest-ranked representative from each scaffold class. See `docs/PRIORITIZATION.md` and `data/prioritized/bcrabl_final_50000.csv`.
+
 ## Data provenance
 
 Experimental records originated from ChEMBL target `CHEMBL2096618` and complementary BindingDB records. Exact quantitative values reported in nM were retained, censored observations were removed, structures were standardized with RDKit, and modeling was restricted to IC50. See [`docs/PROVENANCE.md`](docs/PROVENANCE.md) for the documented processing chain and current reproducibility limits.
 
 ## Repository scope
 
-This repository is a publication-oriented release, not the complete 802 MB working directory. Duplicate copies, raw database exports, fingerprint matrices, fitted model binaries, temporary outputs, docking files, and MD trajectories are intentionally excluded. Large reusable artifacts should be deposited in a versioned research repository such as Zenodo rather than committed directly to GitHub.
+This repository is a publication-oriented release, not the complete working directory. Duplicate copies, raw database exports, large fingerprint matrices, most fitted-model binaries, temporary outputs, docking files, and MD trajectories are intentionally excluded. The compact optimized XGBoost surrogate is included because it is required by the reconstructed reward implementation. Other large reusable artifacts should be deposited in a versioned research repository such as Zenodo rather than committed directly to GitHub.
 
 ## Citation
 

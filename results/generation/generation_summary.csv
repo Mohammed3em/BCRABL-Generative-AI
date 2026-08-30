@@ -1,0 +1,14 @@
+metric,value
+targeted_sequences,1000000
+valid_unique_molecules,723314
+unique_murcko_scaffolds,499968
+internal_diversity_seed42,0.877
+internal_diversity_seed123,0.877
+maximum_reference_similarity_mean,0.385
+maximum_reference_similarity_median,0.357
+similarity_below_0.40_count,469702
+similarity_0.40_to_below_0.60_count,207150
+similarity_0.60_to_below_0.80_count,40471
+similarity_0.80_or_higher_count,5991
+similarity_below_0.60_percent,93.58
+non_exact_tl_reproductions_percent,99.83
