@@ -1,0 +1,17 @@
+# Lightweight release verification
+numpy>=1.24,<3
+pandas>=2.0,<3
+
+# Tree-model retraining
+joblib
+matplotlib
+optuna
+scikit-learn
+shap
+xgboost
+
+# Deep-model retraining; pin exact versions after recovering the original environment
+torch
+torch-geometric
+transformers
+tqdm

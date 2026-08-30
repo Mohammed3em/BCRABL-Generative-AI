@@ -1,6 +1,6 @@
-# BCR::ABL1 AI study — data release
+# BCR::ABL1 generative AI study — data and modeling release
 
-This repository contains the curated IC50 dataset, the fixed Bemis–Murcko scaffold partitions used for predictive modeling, and Supplementary Data S1 for the manuscript:
+This repository contains the curated IC50 dataset, fixed Bemis–Murcko scaffold partitions, predictive-model scripts and evaluation outputs, and Supplementary Data S1 for the manuscript:
 
 > *Generative AI for BCR::ABL1 Inhibitor Design: Predictive Modeling, Target-Focused Fine-Tuning, Reinforcement Learning, and Multi-Level Validation*
 
@@ -34,9 +34,16 @@ Install the lightweight validation dependencies and run:
 ```bash
 python -m pip install -r requirements.txt
 python scripts/validate_release.py
+python scripts/modeling/verify_reported_metrics.py
 ```
 
-The command checks row counts, unique structures, partition coverage, scaffold separation, expected columns, and SHA-256 checksums.
+The commands check dataset integrity and independently recalculate R², RMSE, and MAE from the released prediction files.
+
+## Predictive modeling
+
+Five regressors were evaluated on the same fixed scaffold partitions: XGBoost, Random Forest, GIN, ChemBERTa-77M-MLM, and IBM MolFormer-XL. XGBoost had the strongest independent-test performance (R² = 0.7516, RMSE = 0.8064, MAE = 0.5989), followed by Random Forest (R² = 0.7377, RMSE = 0.8286, MAE = 0.6028). Exact prediction tables, training histories where available, optimized tree-model parameters, and the benchmark summary are stored under `results/modeling/`.
+
+The scripts in `scripts/modeling/study_scripts/` preserve the code used during model development. See `docs/QSAR_REPRODUCIBILITY.md` before attempting full retraining because the original scripts retain their working-directory assumptions and deep models require separate GPU-capable environments.
 
 ## Data provenance
 
@@ -44,7 +51,7 @@ Experimental records originated from ChEMBL target `CHEMBL2096618` and complemen
 
 ## Repository scope
 
-This package is a publication-oriented **data release**, not the complete 802 MB working directory. Duplicate copies, raw database exports, fingerprint matrices, fitted model binaries, temporary outputs, docking files, and MD trajectories are intentionally excluded. Large reusable artifacts should be deposited in a versioned research repository such as Zenodo rather than committed directly to GitHub.
+This repository is a publication-oriented release, not the complete 802 MB working directory. Duplicate copies, raw database exports, fingerprint matrices, fitted model binaries, temporary outputs, docking files, and MD trajectories are intentionally excluded. Large reusable artifacts should be deposited in a versioned research repository such as Zenodo rather than committed directly to GitHub.
 
 ## Citation
 
