@@ -6,8 +6,9 @@ authors:
   - family-names: "Sahib"
     given-names: "Mohammed Abdulaali"
     orcid: "https://orcid.org/0009-0006-9992-5653"
-affiliation: "Department of Pharmaceutical Chemistry, College of Pharmacy, University of Kerbala"
-version: 1.0.0
-date-released: 2026-08-30
+    affiliation: "Department of Pharmaceutical Chemistry, College of Pharmacy, University of Kerbala, Karbala, Iraq"
+  - family-names: "Mohammad-Salim"
+    given-names: "Haydar"
+    affiliation: "Department of Chemistry, College of Science, University of Zakho, Zakho 42002, Kurdistan Region, Iraq"
 repository-code: "https://github.com/Mohammed3em/BCRABL-Generative-AI"
 abstract: "Curated compound-level BCR::ABL1 IC50 data, fixed Bemis-Murcko scaffold partitions, and supplementary AI-prioritization data associated with a generative molecular-design study."

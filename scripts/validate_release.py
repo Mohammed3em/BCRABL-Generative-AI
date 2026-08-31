@@ -16,6 +16,7 @@ PROCESSED = ROOT / "data" / "processed"
 SPLITS = ROOT / "data" / "splits"
 ACYCLIC = "[ACYCLIC]"
 CHECKSUM_MANIFEST = ROOT / "metadata" / "SHA256SUMS"
+TEXT_SUFFIXES = {".cff", ".csv", ".json", ".md", ".py", ".smi", ".toml", ".txt"}
 
 
 def fail(message: str) -> None:
@@ -24,6 +25,11 @@ def fail(message: str) -> None:
 
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
+    if path.suffix.lower() in TEXT_SUFFIXES or path.name == "SHA256SUMS":
+        # Git may check out text files with CRLF on Windows. Normalize line
+        # endings so the published checksums remain platform-independent.
+        digest.update(path.read_bytes().replace(b"\r\n", b"\n"))
+        return digest.hexdigest()
     with path.open("rb") as handle:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)

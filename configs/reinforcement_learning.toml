@@ -9,7 +9,7 @@ tb_logdir = "tb_BCRABL_RL"
 
 prior_file = "models/BCRABL_REINVENT_prior.model"
 
-agent_file = "models/BCRABL_REINVENT_agent.model"
+agent_file = "models/BCRABL_REINVENT_prior.model"
 
 summary_csv_prefix = "BCRABL_RL_output_stage2"
 
@@ -39,7 +39,7 @@ minscore = 0.5
 
 [[stage]]
 
-chkpt_file = "BCRABL_stage1.chkpt"
+chkpt_file = "models/BCRABL_stage1.chkpt"
 
 termination = "simple"
 

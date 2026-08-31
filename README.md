@@ -4,7 +4,7 @@ This repository contains the curated IC50 dataset, fixed Bemis–Murcko scaffold
 
 > *Generative AI for BCR::ABL1 Inhibitor Design: Predictive Modeling, Target-Focused Fine-Tuning, Reinforcement Learning, and Multi-Level Validation*
 
-Author: Mohammed Abdulaali Sahib, Department of Pharmaceutical Chemistry, College of Pharmacy, University of Kerbala, Iraq. ORCID: [0009-0006-9992-5653](https://orcid.org/0009-0006-9992-5653).
+**Authors:** Mohammed Abdulaali Sahib and Haydar Mohammad-Salim
 
 ## What is included
 
@@ -16,6 +16,9 @@ Author: Mohammed Abdulaali Sahib, Department of Pharmaceutical Chemistry, Colleg
 | `data/splits/validation.csv` | Fixed validation partition | 757 |
 | `data/splits/test.csv` | Fixed independent scaffold-test partition | 782 |
 | `data/supplementary/Supplementary_Data_S1.xlsx` | Ranked AI-generated candidates and associated descriptors | 502 data records in the main sheet |
+| `models/BCRABL_REINVENT_prior.model` | Final target-focused model after transfer learning | 1 model |
+| `models/BCRABL_stage1.chkpt` | Final reinforcement-learning checkpoint | 1 checkpoint |
+| `scripts/generation/comp_bcrabl.py` | Original REINVENT4 custom scoring component | 1 script |
 
 The partitions contain 2,672, 334, and 335 scaffold classes, respectively, with no scaffold shared across subsets.
 
@@ -40,7 +43,7 @@ python scripts/prioritization/validate_final_library.py
 python scripts/docking/validate_docking_release.py
 ```
 
-The commands check dataset integrity, independently recalculate R², RMSE, and MAE from the released prediction files, and validate the released generative settings, final 50,000-member library, and docking tables.
+The commands check dataset integrity, independently recalculate R², RMSE, and MAE from the released prediction files, verify the released generative model artifacts and settings, and validate the final 50,000-member library and docking tables.
 
 ## Predictive modeling
 
@@ -52,7 +55,7 @@ The scripts in `scripts/modeling/study_scripts/` preserve the code used during m
 
 The historical transfer-learning input contains 5,624 records (5,617 distinct SMILES). REINVENT4 transfer learning used 20 epochs, a batch size of 50, and CUDA acceleration. Reinforcement learning used the DAP strategy (learning rate 1 × 10⁻⁴, sigma 128, batch size 64) with randomized SMILES augmentation. The final reward was `0.80 × activity + 0.20 × novelty`, with invalid structures assigned zero. The `IdenticalMurckoScaffold` diversity filter used a bucket size of 25 and minimum score 0.5. Production sampling targeted 1,000,000 sequences with duplicate control enabled and randomized SMILES disabled.
 
-The original final reward-source file was not retained. `scripts/generation/bcrabl_reward_reconstructed.py` is therefore explicitly identified as a reconstructed reference implementation of manuscript Equations 2–4; it is not represented as the original historical file. See `docs/GENERATIVE_REPRODUCIBILITY.md`.
+The original REINVENT4 custom scoring component is provided as `scripts/generation/comp_bcrabl.py`. Its model and training-data paths were adapted to the repository layout; the scoring equations and REINVENT4 component interface were preserved. The released target-focused transfer-learning prior and final RL checkpoint are stored under `models/`. See `docs/GENERATIVE_REPRODUCIBILITY.md`.
 
 ## Generation validation and prioritization
 
@@ -70,7 +73,7 @@ Experimental records originated from ChEMBL target `CHEMBL2096618` and complemen
 
 ## Repository scope
 
-This repository is a publication-oriented release, not the complete working directory. Duplicate copies, raw database exports, large fingerprint matrices, most fitted-model binaries, temporary outputs, raw docking project files, and MD trajectories are intentionally excluded. The compact optimized XGBoost surrogate is included because it is required by the reconstructed reward implementation. Final REINVENT prior/agent weights are not included; consequently, the supplied generative configurations document the completed runs but cannot be executed end-to-end from a fresh clone without those historical weights.
+This repository is a publication-oriented release, not the complete working directory. Duplicate copies, raw database exports, large fingerprint matrices, most fitted-model binaries, temporary outputs, raw docking project files, and MD trajectories are intentionally excluded. The compact optimized XGBoost surrogate, target-focused transfer-learning prior, final RL checkpoint, original custom scoring component, transfer-learning corpus, and final REINVENT4 configurations are included. Retraining transfer learning from the generic REINVENT prior requires the standard pretrained `reinvent.prior` distributed with REINVENT4 v4.8.24.
 
 ## Citation
 
@@ -78,4 +81,4 @@ Please cite the associated article after publication. Machine-readable author, t
 
 ## License and source attribution
 
-See [`LICENSES.md`](LICENSES.md). The upstream databases retain their respective terms and must be attributed. No license for the author-created code has been selected in this draft release.
+See [`LICENSES.md`](LICENSES.md). Author-created code and documentation are released under the MIT License; upstream databases retain their respective terms and must be attributed.

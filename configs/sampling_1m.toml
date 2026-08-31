@@ -13,7 +13,7 @@ json_out_config = "BCRABL_sampling.json"  # write this TOML to JSON
 # file and possibly a SMILES file with seed structures.
 
 ## Reinvent: de novo sampling
-model_file = "models/BCRABL_REINVENT_agent.model"
+model_file = "models/BCRABL_stage1.chkpt"
 
 ## LibInvent: find R-groups for the given scaffolds
 #model_file = "priors/libinvent.prior"
@@ -40,5 +40,5 @@ model_file = "models/BCRABL_REINVENT_agent.model"
 output_file = "BCRABL_RL_generated_1M.csv" # sampled SMILES and NLL in CSV format
 
 num_smiles = 1000000  # number of SMILES to be sampled, 1 per input SMILES
-unique_molecules = true  # if true remove all duplicatesd canonicalize smiles
+unique_molecules = true  # if true, canonicalize SMILES and remove duplicates
 randomize_smiles = false # if true shuffle atoms in SMILES randomly
