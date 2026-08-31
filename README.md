@@ -1,6 +1,6 @@
 # BCR::ABL1 generative AI study — data and modeling release
 
-This repository contains the curated IC50 dataset, fixed Bemis–Murcko scaffold partitions, predictive-model evidence, and the final target-focused REINVENT4 transfer-learning, reinforcement-learning, and production-sampling configuration for the manuscript:
+This repository contains the curated IC50 dataset, fixed Bemis–Murcko scaffold partitions, predictive-model evidence, and target-focused REINVENT4 transfer-learning and reinforcement-learning artifacts for the manuscript:
 
 > *Generative AI for BCR::ABL1 Inhibitor Design: Predictive Modeling, Target-Focused Fine-Tuning, Reinforcement Learning, and Multi-Level Validation*
 
@@ -53,7 +53,7 @@ The scripts in `scripts/modeling/study_scripts/` preserve the code used during m
 
 ## Generative modeling
 
-The historical transfer-learning input contains 5,624 records (5,617 distinct SMILES). REINVENT4 transfer learning used 20 epochs, a batch size of 50, and CUDA acceleration. Reinforcement learning used the DAP strategy (learning rate 1 × 10⁻⁴, sigma 128, batch size 64) with randomized SMILES augmentation. The final reward was `0.80 × activity + 0.20 × novelty`, with invalid structures assigned zero. The `IdenticalMurckoScaffold` diversity filter used a bucket size of 25 and minimum score 0.5. Production sampling targeted 1,000,000 sequences with duplicate control enabled and randomized SMILES disabled.
+The historical transfer-learning input contains 5,624 records (5,617 distinct SMILES). REINVENT4 transfer learning used 20 epochs, a batch size of 50, and CUDA acceleration. Reinforcement learning used the DAP strategy (learning rate 1 × 10⁻⁴, sigma 128, batch size 64) with randomized SMILES augmentation. The final reward was `0.80 × activity + 0.20 × novelty`, with invalid structures assigned zero. The `IdenticalMurckoScaffold` diversity filter used a bucket size of 25 and minimum score 0.5. The production generation campaign sampled 1,000,000 sequences before validity and uniqueness processing.
 
 The original REINVENT4 custom scoring component is provided as `scripts/generation/comp_bcrabl.py`. Its model and training-data paths were adapted to the repository layout; the scoring equations and REINVENT4 component interface were preserved. The released target-focused transfer-learning prior and final RL checkpoint are stored under `models/`. See `docs/GENERATIVE_REPRODUCIBILITY.md`.
 
@@ -73,7 +73,7 @@ Experimental records originated from ChEMBL target `CHEMBL2096618` and complemen
 
 ## Repository scope
 
-This repository is a publication-oriented release, not the complete working directory. Duplicate copies, raw database exports, large fingerprint matrices, most fitted-model binaries, temporary outputs, raw docking project files, and MD trajectories are intentionally excluded. The compact optimized XGBoost surrogate, target-focused transfer-learning prior, final RL checkpoint, original custom scoring component, transfer-learning corpus, and final REINVENT4 configurations are included. Retraining transfer learning from the generic REINVENT prior requires the standard pretrained `reinvent.prior` distributed with REINVENT4 v4.8.24.
+This repository is a publication-oriented release, not the complete working directory. Duplicate copies, raw database exports, large fingerprint matrices, most fitted-model binaries, temporary outputs, raw docking project files, and MD trajectories are intentionally excluded. The compact optimized XGBoost surrogate, target-focused transfer-learning prior, final RL checkpoint, original custom scoring component, transfer-learning corpus, and TL/RL configurations are included. Retraining transfer learning from the generic REINVENT prior requires the standard pretrained `reinvent.prior` distributed with REINVENT4 v4.8.24.
 
 ## Citation
 

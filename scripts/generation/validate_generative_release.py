@@ -46,7 +46,6 @@ def main() -> int:
 
     tl = (ROOT / "configs" / "transfer_learning.toml").read_text(encoding="utf-8")
     rl = (ROOT / "configs" / "reinforcement_learning.toml").read_text(encoding="utf-8")
-    sampling = (ROOT / "configs" / "sampling_1m.toml").read_text(encoding="utf-8")
     require(r"num_epochs\s*=\s*20", tl, "20 TL epochs")
     require(r"batch_size\s*=\s*50", tl, "TL batch size 50")
     require(r'type\s*=\s*"dap"', rl, "DAP learning strategy")
@@ -59,15 +58,6 @@ def main() -> int:
     require(r"max_score\s*=\s*0\.8", rl, "target score 0.80")
     require(r"min_steps\s*=\s*25", rl, "minimum 25 steps")
     require(r"max_steps\s*=\s*1000", rl, "maximum 1,000 steps")
-    require(r"num_smiles\s*=\s*1000000", sampling, "one million samples")
-    require(r"unique_molecules\s*=\s*true", sampling, "duplicate control")
-    require(r"randomize_smiles\s*=\s*false", sampling, "production randomization disabled")
-    require(
-        r'model_file\s*=\s*"models/BCRABL_stage1\.chkpt"',
-        sampling,
-        "production sampling from the final RL checkpoint",
-    )
-
     prior = ROOT / "models" / "BCRABL_REINVENT_prior.model"
     rl_checkpoint = ROOT / "models" / "BCRABL_stage1.chkpt"
     reward_source = ROOT / "scripts" / "generation" / "comp_bcrabl.py"
